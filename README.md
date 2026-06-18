@@ -74,13 +74,7 @@ work/paper_translation/
 
 ## 怎么使用
 
-这个仓库的 Skill 本体在 `skill/academic-paper-translator/`。把这个目录安装到 skills 目录后，对你的AI Agent说说：
-
-```text
-Use $academic-paper-translator to translate this long English academic paper into a complete Chinese full-text translation.
-```
-
-或者直接说：
+这个仓库的 Skill 本体在 `skill/academic-paper-translator/`。把这个目录安装到 skills 目录后，对你的AI Agent说：
 
 ```text
 使用academic-paper-translator帮我把这篇英文论文完整翻译成中文。
@@ -91,16 +85,10 @@ Use $academic-paper-translator to translate this long English academic paper int
 
 它默认适合大多数英文 academic papers，尤其是这些场景：
 
-- 社科理论论文
-- empirical research paper
-- literature review
-- education / psychology / sociology paper
-- machine learning / CS paper
-- medical / biomedical paper
-- economics / management paper
-- humanities paper
-- thesis chapter 或 long report
-
+- 文献综述类论文
+- 期刊
+- 图书章节
+- 学术会议摘要或报告
 
 ## 可能存在的问题
 
