@@ -1,0 +1,6 @@
+interface:
+  display_name: "Academic Paper Translator"
+  short_description: "Translate long academic papers fully"
+  default_prompt: "Use $academic-paper-translator to translate this long English academic paper into a complete Chinese full-text translation."
+policy:
+  allow_implicit_invocation: true
