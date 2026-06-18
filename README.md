@@ -83,7 +83,7 @@ Use $academic-paper-translator to translate this long English academic paper int
 或者直接说：
 
 ```text
-使用academic-paper-translator帮我把这篇英文论文完整翻译成中文，不要摘要，保留页码、引用、公式、图表编号和参考文献。
+使用academic-paper-translator帮我把这篇英文论文完整翻译成中文。
 ```
 
 
