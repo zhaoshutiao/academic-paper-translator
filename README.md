@@ -1,19 +1,20 @@
 # Academic Paper Translator
 
-一款给留子、研究生、社科阅读周、文献综述季准备的论文全文翻译 Skill。
 
-之前在海外留学的时候常常要面临一门课一周5篇超长paper，每篇几十页，全英文，句子长、术语密、引用多，不读还不行因为教授特别喜欢在seminar 里点人起来讨论（小学点名起来背课文的恐惧为何追杀我到现在）。不认真读觉得对不起自己的学费，认真读完又觉得脑子疼。
+对中文母语者来说，阅读一篇英文 Paper，往往比阅读一篇中文论文多一层消耗：反复查词、辨认长句，再一点点理清论证。时间和心力，就花在这些细小的停顿里。
 
-后来感谢天感谢地感谢Open AI，有了GPT的辅助确实轻松了很多。但长文翻译还是有一些很烦人的问题：文章一长，它可能翻着翻着就开始漏段，或者把几页内容压成一小段总结；页码、引用、图表编号这些细节也容易丢；有时候同一个术语前后翻得不一样，读起来很割裂。这个时候就需要我手动把文章切分成不同的段落，一块一块的喂给AI。体验确实比古法查单词快多了，但整个过程还是很机械、很重复，也很不自动化。
+LLM 减轻了这份负担，但面对长篇论文，仍可能出现漏段、跳段或丢失关键细节的问题。为了得到完整的译文，使用者还得手动拆分文档，分次交给 AI，再逐一整理、拼接。翻译效果虽然得到提升，重复的搬运工作却留了下来。
 
-所以我做了这个 Skill，让AI来实现切块-翻译-合并-输出完整的中文翻译。而你需要做的，只是把英文论文文档丢进去，然后拿到一份可以通读、可以对照、可以继续精读的中文版本。
+所以我做了这个 Skill，把**切分、翻译、合并和输出**串成一个流程，让 AI 接手这些机械的工作。
 
+你只需要一键丢入英文论文，就能得到一份可供通读、对照和继续精读的中文译文，把精力留给理解、思考，以及形成自己的判断。
+
+语言是人类的巴别塔。愿这个 Skill 带你翻越它。
 
 ## 它适合谁
 
-- 海外社科、人文、教育、心理、管理、传播等专业学生
 - 每周需要读大量英文 paper 的留学生
-- 正在写 literature review、reading response、seminar notes 的人
+- 正在写 literature review、reading response、seminar notes 的硕士和博士研究生
 - 想先用中文通读全文，再回到英文原文精读的人
 - 需要保留页码、引用、图表编号，方便课堂讨论和写作引用的人
 
@@ -42,33 +43,6 @@
 - **进度可恢复**：中途停下也可以根据 `manifest.json` 和 `progress.json` 继续。
 - **结构 QA 检查**：用脚本检查漏文件、漏页码、漏引用、漏图表编号、漏 DOI、参考文献改动等问题。
 
-## 它怎么工作
-
-这个 Skill 会把论文翻译流程拆成几个步骤：
-
-1. 从 PDF / DOCX / Markdown / LaTeX / TXT 提取文本。
-2. 生成带页码和结构信息的 `source.md`。
-3. 按章节和长度切成多个 chunk。
-4. 先建立术语表，再逐 chunk 翻译。
-5. 每个 chunk 翻译后跑 QA。
-6. 检查所有 chunk 是否完成。
-7. 合并成最终中文 Markdown 全文。
-
-典型输出结构：
-
-```text
-work/paper_translation/
-  source/
-    source.md
-    source_metadata.json
-  chunks/
-  translations/
-  final/
-    paper_zh.md
-  manifest.json
-  glossary.json
-  progress.json
-```
 
 ## 怎么使用
 
@@ -77,7 +51,6 @@ work/paper_translation/
 ```text
 使用academic-paper-translator帮我把这篇英文论文完整翻译成中文。
 ```
-
 
 ## 适合翻译哪些论文
 
@@ -90,7 +63,6 @@ work/paper_translation/
 
 ## 可能存在的问题
 
-这个 Skill 的目标是让长论文翻译更稳定、更可检查，但它不会神奇修复所有问题：
 
 - 扫描版 PDF 可能需要 OCR。
 - 双栏 PDF 可能出现文本顺序错乱。
@@ -98,17 +70,5 @@ work/paper_translation/
 - 图像里的文字不一定能提取。
 - 翻译质量仍然需要人工抽查，尤其是理论概念、统计结果和关键论证。
 
-最保险的使用方式是：先让 Skill 生成完整中文全文，再带着中文理解回到英文原文精读重点段落。它负责帮你拆掉语言门槛，你负责做最后的判断。
 
-
-```
-
-- `README.md`：GitHub 首页介绍。
-- `skill/academic-paper-translator/SKILL.md`：Codex 使用这个 Skill 时读取的核心工作流。
-- `skill/academic-paper-translator/references/translation_style.md`：中文学术翻译风格规则。
-- `skill/academic-paper-translator/references/content_type_rules.md`：公式、图表、引用、参考文献等内容类型处理规则。
-- `skill/academic-paper-translator/scripts/extract_source.py`：从论文文件提取文本。
-- `skill/academic-paper-translator/scripts/chunk_paper.py`：把长论文切成可翻译 chunk。
-- `skill/academic-paper-translator/scripts/check_manifest.py`：检查翻译进度。
-- `skill/academic-paper-translator/scripts/qa_translation.py`：检查结构性漏翻和标记丢失。
-- `skill/academic-paper-translator/scripts/merge_translations.py`：合并最终译文。
+## 祝组会顺利，学习愉快。
